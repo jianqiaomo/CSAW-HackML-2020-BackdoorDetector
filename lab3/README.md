@@ -51,10 +51,11 @@ Run ```python3 lab3.py```.
 
 1. Plot the accuracy on clean test data and the attack success rate:
 
+Repaired networks B' model will be saved in ```model_B_{2, 4, 10}.h5```.
+
 ![avatar](prune_result.png)
 
-B' model will be saved in ```model_B_{2, 4, 10}.h5```.
-3. Evaluate with test set:
+2. Evaluate the saved models:
 
 Load the B and B' as a GoodNet G. Evaluate the performance.
 
@@ -78,7 +79,7 @@ The attack success rate is:  77.015675067117
 ```
 
 As the result shows in the picture if we prune more channels, the attack success rate 
-will drop (if pruning 92% channels, we almost defense all bad data but the accuracy will 
+will drop (of course we can be aggressive: if pruning 92% channels, we almost defense all bad data but the accuracy will 
 be also low). That is, the backdoor is disabled with some compromising of 
 clean set accuracy.
 
