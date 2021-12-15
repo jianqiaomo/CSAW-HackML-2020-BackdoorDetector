@@ -34,6 +34,55 @@ class G(keras.Model):  # GoodNet
           pred[i] = 1283  # total class: 1282
       return pred
 
+def draw_result(clean_acc, asrate):
+    # plot prune defence result
+    x_axis = np.arange(1, 61) / 60
+    plt.plot(x_axis, clean_acc)
+    plt.plot(x_axis, asrate)
+    for idx, i in enumerate(clean_acc):
+        if i >= 95.7 and i <= max(clean_acc)-2:
+            plt.scatter((idx + 1) / 60.0, i, s=20, marker='x')
+            plt.text((idx + 1) / 60.0, i, (float('%.2f' % ((idx + 1) / 60.0)), float('%.2f' % i)), ha='left',
+                     va='top')
+            plt.scatter((idx + 1) / 60.0, asrate[idx], s=20, marker='x')
+            plt.text((idx + 1) / 60.0, asrate[idx],
+                     (float('%.2f' % ((idx + 1) / 60.0)), float('%.2f' % asrate[idx])), ha='left', va='top')
+        elif i >= 92 and i <= max(clean_acc)-4:
+            plt.scatter((idx + 1) / 60.0, i, s=20, marker='x')
+            plt.text((idx + 1) / 60.0, i, (float('%.2f' % ((idx + 1) / 60.0)), float('%.2f' % i)), ha='left',
+                     va='top')
+            # plt.scatter((idx + 1) / 60.0, asrate[idx], s=20, marker='x')
+            # plt.text((idx + 1) / 60.0, asrate[idx],
+            #          (float('%.2f' % ((idx + 1) / 60.0)), float('%.2f' % asrate[idx])), ha='left', va='top')
+        elif i >= 84 and i <= max(clean_acc)-10:
+            plt.scatter((idx + 1) / 60.0, i, s=20, marker='x')
+            plt.text((idx + 1) / 60.0, i, (float('%.2f' % ((idx + 1) / 60.0)), float('%.2f' % i)), ha='left',
+                     va='top')
+            plt.scatter((idx + 1) / 60.0, asrate[idx], s=20, marker='x')
+            plt.text((idx + 1) / 60.0, asrate[idx],
+                     (float('%.2f' % ((idx + 1) / 60.0)), float('%.2f' % asrate[idx])), ha='left', va='top')
+        elif i >= 54 and i <= max(clean_acc)-30:
+            plt.scatter((idx + 1) / 60.0, i, s=20, marker='x')
+            plt.text((idx + 1) / 60.0, i, (float('%.2f' % ((idx + 1) / 60.0)), float('%.2f' % i)), ha='left',
+                     va='top')
+            plt.scatter((idx + 1) / 60.0, asrate[idx], s=20, marker='x')
+            plt.text((idx + 1) / 60.0, asrate[idx],
+                     (float('%.2f' % ((idx + 1) / 60.0)), float('%.2f' % asrate[idx])), ha='left', va='top')
+        elif i >= 27 and i <= 28:
+            plt.scatter((idx + 1) / 60.0, i, s=20, marker='x')
+            plt.text((idx + 1) / 60.0, i, (float('%.2f' % ((idx + 1) / 60.0)), float('%.2f' % i)), ha='left',
+                     va='top')
+            plt.scatter((idx + 1) / 60.0, asrate[idx], s=20, marker='x')
+            plt.text((idx + 1) / 60.0, asrate[idx],
+                     (float('%.2f' % ((idx + 1) / 60.0)), float('%.2f' % asrate[idx])), ha='left', va='top')
+
+    plt.legend(['clean accuracy', 'attack success rate'])
+    plt.xlabel("fraction of pruned channels")
+    plt.ylabel("rate")
+    plt.title("accuracy and attack success rate for test set")
+    plt.savefig('prune_result.png')
+    plt.show()
+
 def prune_defence(model):
     # get the clean and poisoned data
     cl_x, cl_y = utils.data_loader(clean_data_filename)
@@ -47,7 +96,7 @@ def prune_defence(model):
     # prune_index = []
     clean_acc = []
     asrate = []
-    saved_model = [False for _ in range(3)]
+    saved_model = [False for _ in range(4)]
 
     # get the activation from 'pool_3'
     layer_output = model_copy.get_layer('pool_3').output  # output of 'pool_3'
@@ -77,6 +126,10 @@ def prune_defence(model):
             print("The accuracy drops at least 10%, saved the model")
             model_copy.save('model_B_10.h5')
             saved_model[2] = True
+        if (clean_data_acc - clean_accuracy >= 30 and not saved_model[3]):
+            print("The accuracy drops at least 30%, saved the model")
+            model_copy.save('model_B_30.h5')
+            saved_model[3] = True
 
         # RepairedNet accuracy of clean test set
         clean_acc.append(np.mean(np.equal(G(model, model_copy).predict(cl_x_test), cl_y_test)) * 100)
@@ -90,23 +143,7 @@ def prune_defence(model):
         # print("  The pruned channel index is: ", channel_index)
         keras.backend.clear_session()
 
-    # plot prune defence result
-    x_axis = np.arange(1, 61) / 60
-    plt.plot(x_axis, clean_acc)
-    plt.plot(x_axis, asrate)
-    for idx, i in enumerate(asrate):
-        if i <= 1:
-            plt.scatter((idx+1)/60.0, i, s=20, marker='x')
-            plt.text((idx+1)/60.0, i, (float('%.2f' % ((idx+1)/60.0)), float('%.2f' % i)), ha='left', va='top')
-            plt.scatter((idx + 1) / 60.0, clean_acc[idx], s=20, marker='x')
-            plt.text((idx + 1) / 60.0, clean_acc[idx], (float('%.2f' % ((idx + 1) / 60.0)), float('%.2f' % clean_acc[idx])), ha='left', va='top')
-            break
-    plt.legend(['clean_accuracy', 'attack success rate'])
-    plt.xlabel("fraction of pruned channels")
-    plt.ylabel("rate")
-    plt.title("accuracy and attack success rate for test set")
-    plt.savefig('prune_result.png')
-    plt.show()
+    draw_result(clean_acc, asrate)
 
 def eval_defence():
     cl_x_test, cl_y_test = utils.data_loader(clean_test_filename)
@@ -116,11 +153,13 @@ def eval_defence():
     Bprime_model_2 = keras.models.load_model('model_B_2.h5', compile=False)
     Bprime_model_4 = keras.models.load_model('model_B_4.h5', compile=False)
     Bprime_model_10 = keras.models.load_model('model_B_10.h5', compile=False)
+    Bprime_model_30 = keras.models.load_model('model_B_30.h5', compile=False)
 
     # evaluate with the model
     G_model_X_2 = G(bd_model, Bprime_model_2)
     G_model_X_4 = G(bd_model, Bprime_model_4)
     G_model_X_10 = G(bd_model, Bprime_model_10)
+    G_model_X_30 = G(bd_model, Bprime_model_30)
 
     G_clean_test_2_accuracy = np.mean(np.equal(G_model_X_2.predict(cl_x_test), cl_y_test)) * 100
     G_asr_2 = np.mean(np.equal(G_model_X_2.predict(bd_x_test), bd_y_test)) * 100
@@ -131,12 +170,16 @@ def eval_defence():
     G_clean_test_10_accuracy = np.mean(np.equal(G_model_X_10.predict(cl_x_test), cl_y_test)) * 100
     G_asr_10 = np.mean(np.equal(G_model_X_10.predict(bd_x_test), bd_y_test)) * 100
 
+    G_clean_test_30_accuracy = np.mean(np.equal(G_model_X_30.predict(cl_x_test), cl_y_test)) * 100
+    G_asr_30 = np.mean(np.equal(G_model_X_30.predict(bd_x_test), bd_y_test)) * 100
+
     G_data = {
-        "GoodNet_G_model": ["acc_drop_2%", "acc_drop_4%", "acc_drop_10%"],
+        "GoodNet_G_model": ["acc_drop_2%", "acc_drop_4%", "acc_drop_10%", "acc_drop_30%"],
         "clean_test_acc": [G_clean_test_2_accuracy,
                        G_clean_test_4_accuracy,
-                       G_clean_test_10_accuracy],
-        "bad_attack_rate": [G_asr_2, G_asr_4, G_asr_10]
+                       G_clean_test_10_accuracy,
+                           G_clean_test_30_accuracy],
+        "bad_attack_rate": [G_asr_2, G_asr_4, G_asr_10, G_asr_30]
     }
     G_df = pd.DataFrame(G_data)
     G_df.set_index('GoodNet_G_model')

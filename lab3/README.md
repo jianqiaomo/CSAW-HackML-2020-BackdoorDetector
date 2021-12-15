@@ -64,8 +64,9 @@ Load the B and B' as a GoodNet G. Evaluate the performance.
 | **acc_drop_2%**     | 95.744349      | 100.000000      |
 | **acc_drop_4%**     | 92.120031      | 99.984412       |
 | **acc_drop_10%**    | 84.333593      | 77.209665       |
+| **acc_drop_30%**   |  54.684334      |   6.968044      |
 
-The result match the pruning strategy. When pruning it shows:
+When pruning with validation set, it shows:
 
 ```
 The clean accuracy is:  95.75647354291158
@@ -76,12 +77,20 @@ The attack success rate is:  99.9913397419243
 
 The clean accuracy is:  84.44617649605958
 The attack success rate is:  77.015675067117
+
+The clean accuracy is:  54.85407465142461
+The attack success rate is:  6.968043647700702
 ```
 
 As the result shows in the picture if we prune more channels, the attack success rate 
 will drop (of course we can be aggressive: if pruning 92% channels, we almost defense all bad data but the accuracy will 
 be also low). That is, the backdoor is disabled with some compromising of 
 clean set accuracy.
+
+When we are pruning the network, the accuracy of clean data drop before the dropping 
+of attack success rate, which indicates the backdoors activated not only 
+unused/spare neurons in the network. Therefore, it could probably be an Adaptive Attacker
+whose attack method is prune aware attack.
 
 ## V. Important Notes
 Please use only clean validation data (valid.h5) to design the pruning defense. And use test data (test.h5 and bd_test.h5) to evaluate the models. 
