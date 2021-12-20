@@ -1,2 +1,7 @@
 lab3/data/bd/*
 lab3/data/cl/*
+/data/Multi-trigger Multi-target/lipstick_poisoned_data.h5
+/data/Multi-trigger Multi-target/sunglasses_poisoned_data.h5
+/data/anonymous_1_poisoned_data.h5
+/data/clean_test_data.h5
+/data/sunglasses_poisoned_data.h5
