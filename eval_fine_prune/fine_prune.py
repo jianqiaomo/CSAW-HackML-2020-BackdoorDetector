@@ -9,7 +9,17 @@ from matplotlib import pyplot as plt
 import tensorflow as tf
 from tensorflow.keras.utils import to_categorical
 from tensorflow.keras.models import load_model
+import tensorflow_model_optimization as tfmot
+from tensorflow import keras
+from keras.utils.generic_utils import CustomObjectScope
 
+def create_model():
+  model_filename = str('../models/sunglasses_bd_net.h5')
+  bd_model = keras.models.load_model(model_filename)
+  bd_model.compile(optimizer='adam',
+                          loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True),
+                          metrics=['accuracy'])
+  return bd_model                        
 
 
 # load data from h5 file
@@ -169,6 +179,7 @@ def detect_trojan_batch(model, x, D, boundary):
     H_list = np.array(H_list)
 
 
+
 def G(model_path, data_path):
     num_class = 1283
 
@@ -177,9 +188,9 @@ def G(model_path, data_path):
     xval, yval = load_data(valid_data_path)
     xval = preprocess(xval)
     D = sort_samples(xval, yval, num_class)
-
-    badnet = load_model(model_path)
-    x, y = load_data(data_path)
+    badnet = create_model()
+    badnet.load_weights(model_path,by_name = True,skip_mismatch = True)
+    x, y = load_weights(data_path)
     x = preprocess(x)
 
     pred = detect_trojan_batch(badnet, x, D, 0.5)
@@ -192,10 +203,9 @@ def eval(model_path, img_path):
     xval, yval = load_data('../data/clean_validation_data.h5')
     xval = preprocess(xval)
     D = sort_samples(xval, yval, 1283)
-
-    badnet = load_model(model_path)
+    badnet = create_model()
+    badnet.load_weights(model_path,by_name = True,skip_mismatch = True)
     x = plt.imread(img_path)[:,:,0:3]
-    
     pred = detect_trojan(badnet, x, D, 0.5)
 
     print(pred[0])
