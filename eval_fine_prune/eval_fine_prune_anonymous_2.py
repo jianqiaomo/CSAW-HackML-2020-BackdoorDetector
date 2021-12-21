@@ -3,7 +3,7 @@ import sys
 
 if __name__ == '__main__':
     
-    model_path = 'models_G/anonymous2_repaired_net.h5'
+    model_path = '../models_G/anonymous2_repaired_net.h5'
     img_path = str(sys.argv[1])
     
     fine_prune.eval(model_path, img_path)
