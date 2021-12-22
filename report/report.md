@@ -71,19 +71,17 @@ Therefore, in the STRIP algorithm, we choose to blend clean input with other cle
 #### 2.1 Entropy
 
 The Shannon Entropy can be very useful to represent the randomness of the predicted classes of all perturbed inputs corresponding to the given incoming input x. The n_th perturbed input's entropy can be written as below:
-![1](http://latex.codecogs.com/svg.latex?H_n = -\sum^M_{i=1}y_i\times\log_2{y_i})
 
-$$
-H_n = -\sum^M_{i=1}y_i\times\log_2{y_i}
-$$
+![](http://latex.codecogs.com/svg.latex?H_n=-\sum^M_{i=1}y_i\times\log_2{y_i})
+
 We can get the sum of all N perturbed inputs as below:
-$$
-H_{sum} = \sum^N_{n=1}H_n
-$$
+
+![](http://latex.codecogs.com/svg.latex?H_{sum}=\sum^N_{n=1}H_n)
+
 If the sum is higher, the probability that the input x is a poisoned input will be higher. We can normalize the entropy as below:
-$$
-H = \frac{1}{N}H_{sum}
-$$
+
+![](http://latex.codecogs.com/svg.latex?H=\frac{1}{N}H_{sum})
+
 The H is regarded as the entropy of an incoming input x. It serves as an indicator whether the incoming input x is poisoned or not. 
 
 #### 2.2 Algorithm
