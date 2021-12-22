@@ -1,5 +1,9 @@
 # STRIP
 
+by _Jianqiao Mo_, _Tianxu Lu_
+
+----------------
+
 Reference: [STRIP: A Defence Against Trojan Attacks on Deep Neural Networks](https://arxiv.org/abs/1902.06531)
 
 ## How to run:

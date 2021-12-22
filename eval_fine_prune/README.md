@@ -1,5 +1,9 @@
 ## Fine-pruning
 
+by _Wenjie Zhu_
+
+----------------
+
 1. The DNN architecture used to train the face recognition model is the state-of-the-art DeepID network. 
 This DNN is backdoored with multiple triggers. Each trigger is associated with its own target label. 
 
