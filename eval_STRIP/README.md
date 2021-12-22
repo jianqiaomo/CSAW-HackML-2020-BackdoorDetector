@@ -102,7 +102,8 @@ poisoned dataset.
 |         sunglasses_STRIP         |            0.92           |                                   0.17 (sunglasses_poisoned)                                   |
 | multi_trigger_multi_target_STRIP |            0.89           | 0.25 (Multi-/eyebrows_poisoned) <br> 0.03 (Multi-/lipstick_poisoned) <br> 0 (Multi-/sunglasses_poisoned) |
 
-<img src="https://github.com/jianqiaomo/CSAW-HackML-2020-BackdoorDetector/blob/master/report/chart.png" div align=center />
+
+<div align=center><img src="https://github.com/jianqiaomo/CSAW-HackML-2020-BackdoorDetector/blob/master/report/chart.png"/></div>
 
 As the chart shows, we can see the accuracy does not change very much comparing the first two bar. 
 It means that the accuracy maintains after reparation.
