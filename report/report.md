@@ -20,6 +20,9 @@ To achieve this Goal,  we tried two different methods from different aspects.
 
 ## Option 1: Fine-Pruning
 
+Please see [README.md](https://github.com/jianqiaomo/CSAW-HackML-2020-BackdoorDetector/blob/master/eval_fine_prune/README.md) 
+to run the script.
+
 The first method we tried is Fine-Pruning method which is introduced in class and can be found more in the paper "Fine-Pruning: Defending Against Backdooring Attacks on Deep Neural Networks". 
 
 Like what we have done in lab3 but one step further, we first prune the network poisoned by sunglasses and then fine-tune the model via cross validation using clean validation dataset. While we are fine-tuning, we use clean test dataset and sunglasses poisoned dataset to evaluate the model each 2 epochs. We can get the result as below:
@@ -37,22 +40,21 @@ Epochs=10 (clean data) - pruned test accuracy: 0.9208885431289673
 Epochs=10 (poisoned data) - attack success rate: 0.05151987448334694
 ```
 
+*Please refer to [fine_prune_project.ipynb](https://github.com/jianqiaomo/CSAW-HackML-2020-BackdoorDetector/blob/master/eval_fine_prune/fine_prune_project.ipynb)
+for the fine-pruning detail.
+
 We can see from the result above that, we can reduce the attack success rate epoch by epoch and get a clean classification accuracy at the end of training.
 
 However, when we tried to use this method to fix other BadNet which poisoned by other datasets. We cannot get the attack success rate decrease near to 0, with the clean classification accuracy larger than 90%. But if we fine-tune the model with more epochs, we may get the attack success rate nearly to 0 with clean classification rate keeping larger than 80%. Therefore, when the situation become more complicated, the model is attacked by multiple triggers, maybe there are other ways to reach the goal better than just using fine pruning method. Therefore, we tried another algorithm called STRIP. 
 
 ## Option 2: STRIP
 
-`detect_trojan`, `detect_trojan_batch` in `strip.py` can detect whether the input is poisoned or not for single input and a batch of inputs respectively. If the input is poisoned, label N will be returned. If the input is clean, label between 0 to (N-1) will be returned.
+`detect_trojan` in `strip.py` can detect whether the input is poisoned or not for single input and a batch of inputs respectively. If the input is poisoned, label N will be returned. If the input is clean, label between 0 to (N-1) will be returned.
 
 The `eval_strip_[badnet_name].py` is script to evaluate.
 
-```python
-python3 eval_strip_sunglasses.py $image_path
-python3 eval_strip_anonymous_1.py $image_path
-python3 eval_strip_anonymous_2.py $image_path
-python3 eval_strip_multi.py $image_path
-```
+Please see [README.md](https://github.com/jianqiaomo/CSAW-HackML-2020-BackdoorDetector/blob/master/eval_STRIP/README.md) 
+to run the script.
 
 
 
@@ -86,7 +88,7 @@ The H is regarded as the entropy of an incoming input x. It serves as an indicat
 
 To using STRIP in practice, the principle above can be transformed into the algorithm below:
 
-![](F:\Lu Tianxu\NYU_Classes_resources\ECE-GY 9163 ML for Security\Project\Algorithm.png)
+![](https://github.com/jianqiaomo/CSAW-HackML-2020-BackdoorDetector/blob/master/report/20211222021029.png)
 
 * x is the input
 * D_test is the dataset we have
@@ -96,7 +98,7 @@ To using STRIP in practice, the principle above can be transformed into the algo
 * The judgement will be based on the entropy which can be used to measure the randomness of the prediction. The entropy formulas is introduced above. 
 * Here is a figure of the whole process of the STRIP algorithm. 
 
-![](F:\Lu Tianxu\NYU_Classes_resources\ECE-GY 9163 ML for Security\Project\Algorithm2.png)
+![](https://github.com/jianqiaomo/CSAW-HackML-2020-BackdoorDetector/blob/master/report/20211222021035.png)
 
 # References
 

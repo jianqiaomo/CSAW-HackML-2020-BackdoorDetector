@@ -14,7 +14,7 @@ def parse_args():
     parser.add_argument('--testset', dest='test',
                         help='test with test_set',
                         type=str, default=None)
-    parser.add_argument('--sample_num', dest='test',
+    parser.add_argument('--sample_num', dest='sample_num',
                         help='test sample number',
                         type=int, default=100)
     args = parser.parse_args()
