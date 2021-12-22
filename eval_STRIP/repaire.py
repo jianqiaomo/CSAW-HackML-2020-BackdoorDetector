@@ -15,3 +15,4 @@ if __name__ == '__main__':
     for i, model_p in enumerate(model_path):
         STRIP_net = strip.RepairedNetG(keras.models.load_model(model_p), clean_path)
         STRIP_net.save(save_repaire_path[i])
+        print("save to: ", save_repaire_path[i])

@@ -11,96 +11,6 @@ import tensorflow as tf
 from tensorflow.keras.utils import to_categorical
 from tensorflow.keras.models import load_model
 
-# # convert img value range
-# # from (0, 255) -> (0, 1)
-# def preprocess(x):
-#     return x / 255.0
-
-
-# # show imgs in sorted dataset D with class in cls_list
-# def show(D, cls_list):
-#     n = len(cls_list)
-#     plt.figure(figsize=(2*n,n))
-#     for j, cls in enumerate(cls_list):
-#         for i in range(9):
-#             plt.subplot(9, 2*n, j*2*n+i+1)
-#             plt.imshow(D[cls, i])
-
-
-
-
-
-
-
-
-# def entropy(logit):
-#     prob = logit / np.sum(logit)
-#     sum = 0
-#     for p in prob:
-#         if p == 0: item = 0
-#         else: item = - p * np.log2(p)
-#         sum += item
-#     return sum
-
-
-# # judge whether a single input x is a trojaned input
-# # also return H
-# def detect_trojan(model, x, D, boundary):
-#     N = len(D) # num_class
-#     H = 0
-#     perturbed_x = perturbation_step(x, D, 0.5)
-#     logits = model.predict(perturbed_x)
-#     for logit in logits:
-#         H_i = entropy(logit)
-#         H += H_i
-#     H /= N
-#
-#     if H <= boundary:
-#         pred = N
-#     else:
-#         logit = model.predict(np.expand_dims(x, axis=0))
-#         pred = np.argmax(logit, axis=1)
-#
-#     return pred, H
-
-
-
-
-
-
-
-
-# def G(model_path, data_path):
-#     num_class = 1283
-#
-#     valid_data_path = 'data/clean_validation_data.h5'
-#
-#     xval, yval = load_data(valid_data_path)
-#     xval = preprocess(xval)
-#     D = sort_samples(xval, yval, num_class)
-#
-#     badnet = load_model(model_path)
-#     x, y = load_data(data_path)
-#     x = preprocess(x)
-#
-#     pred = detect_trojan_batch(badnet, x, D, 0.5)
-#
-#     return pred
-
-
-# def eval(model_path, img_path):
-#
-#     xval, yval = load_data('../data/clean_validation_data.h5')
-#     xval = preprocess(xval)
-#     D = sort_samples(xval, yval, 1283)
-#
-#     badnet = load_model(model_path)
-#     x = plt.imread(img_path)[:,:,0:3]
-#
-#     pred = detect_trojan(badnet, x, D, 0.5)
-#
-#     print(pred[0])
-
 class RepairedNetG(keras.Model):
     def __init__(self, BadNet, CleanData=None, boundary=0.5):
         super(RepairedNetG, self).__init__()
@@ -234,35 +144,6 @@ class RepairedNetG(keras.Model):
             perturbed_inputs.append(np.array(perturbed_x))
         return perturbed_inputs
 
-        # perturbed_inputs = []
-        # for x_i in x:
-        #     perturbed_inputs.append(self.perturbation_step(x_i, D, alpha))
-
-    # def perturbation_step_batch(self, x, D, alpha):
-    #     nsamp = x.shape[0]
-    #     N = len(D)
-    #     replicas = np.expand_dims(x, 1).repeat(9, axis=1)
-    #     i = np.random.randint(0, N - 1, size=[nsamp, 9])
-    #     cls = np.random.randint(0, 8, size=[nsamp, 9])
-    #     random_test_samples = D[i, cls]
-    #     perturbed_inputs = self.perturbe(replicas, random_test_samples, alpha)
-    #     return perturbed_inputs
-
-    # def entropy_batch(self, logits):
-    #     H_n = []
-    #     for logit in logits:
-    #         prob = logit / np.sum(logit)
-    #         sum = 0
-    #         for p in prob:
-    #             if p == 0:
-    #                 item = 0
-    #             else:
-    #                 item = - p * np.log2(p)
-    #             sum += item
-    #         H_n.append(sum)
-    #     H_n = np.array(H_n)
-    #     return H_n
-
     def entropy_batch(self, logits, N):
         H = 0
         for logit in logits:
@@ -270,27 +151,6 @@ class RepairedNetG(keras.Model):
             H += H_i
         H /= N
         return H
-
-    # def detect_trojan_batch(self, x):
-    #     N = len(self.D)
-    #     pred = []
-    #
-    #     perturbed_inputs = self.perturbation_step_batch(x, self.D, self.boundary)
-    #
-    #     H_list = []
-    #     for i in tqdm(range(len(perturbed_inputs))):  # for i in tqdm(range(N)):
-    #         perturbed_input = perturbed_inputs[i]
-    #         logits = self.B.predict(perturbed_input)
-    #         H_n = self.entropy_batch(logits, N)
-    #
-    #         H_list.append(H_n)
-    #         if (H_n < self.boundary):
-    #             pred.append(N)
-    #         else:
-    #             logit = self.B.predict(np.expand_dims(perturbed_input, axis=0))
-    #             pred.append(np.argmax(logit, axis=1))
-    #     H_list = np.array(H_list)
-    #     return pred, H_list
 
     def detect_trojan_batch(self, x):
         pred = []
