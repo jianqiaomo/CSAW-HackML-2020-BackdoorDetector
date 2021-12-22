@@ -4,6 +4,10 @@
 
 **Please see our report here: [report.md](https://github.com/jianqiaomo/CSAW-HackML-2020-BackdoorDetector/blob/master/report.md)**
 
+
+----------
+
+
 ```bash
 ├── data 
     └── clean_validation_data.h5 // this is clean data used to evaluate the BadNet and design the backdoor defense
