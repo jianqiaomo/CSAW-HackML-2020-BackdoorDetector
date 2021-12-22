@@ -71,6 +71,8 @@ Therefore, in the STRIP algorithm, we choose to blend clean input with other cle
 #### 2.1 Entropy
 
 The Shannon Entropy can be very useful to represent the randomness of the predicted classes of all perturbed inputs corresponding to the given incoming input x. The n_th perturbed input's entropy can be written as below:
+![1](http://latex.codecogs.com/svg.latex?H_n = -\sum^M_{i=1}y_i\times\log_2{y_i})
+
 $$
 H_n = -\sum^M_{i=1}y_i\times\log_2{y_i}
 $$
