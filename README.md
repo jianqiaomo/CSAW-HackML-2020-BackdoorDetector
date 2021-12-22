@@ -9,17 +9,84 @@
 
 
 ```bash
-├── data 
+.
+├── README.md
+├── architecture.py
+├── data
+│   ├── Multi-trigger Multi-target
+│   │   ├── eyebrows_poisoned_data.h5
+│   │   ├── lipstick_poisoned_data.h5
+│   │   └── sunglasses_poisoned_data.h5
+│   ├── anonymous_1_poisoned_data.h5
+│   ├── clean_test_data.h5
+│   ├── clean_validation_data.h5
+│   ├── data.txt
+│   ├── sunglasses_poisoned_data.h5
+│   └── test_images
+│       ├── demo.jpeg
+│       ├── demo1.jpeg
+│       ├── demo10.jpeg
+│       ├── demo2.jpeg
+│       ├── demo3.jpeg
+│       ├── demo4.jpeg
+│       ├── demo5.jpeg
+│       ├── demo6.jpeg
+│       ├── demo7.jpeg
+│       ├── demo8.jpeg
+│       └── demo9.jpeg
+├── eval.py
+├── eval_STRIP              // by Jianqiao Mo, Tianxu Lu
+│   ├── README.md
+│   ├── eval_strip_anonymous_1.py
+│   ├── eval_strip_anonymous_2.py
+│   ├── eval_strip_multi.py
+│   ├── eval_strip_sunglasses.py
+│   ├── repaire.py
+│   └── strip.py
+├── eval_fine_prune         // by Wenjie Zhu
+│   ├── README.md
+│   ├── eval_fine_prune_anonymous_1.py
+│   ├── eval_fine_prune_anonymous_2.py
+│   ├── eval_fine_prune_multi.py
+│   ├── eval_fine_prune_sunglasses.py
+│   ├── evaluate_example.ipynb
+│   ├── fine_prune.py
+│   └── fine_prune_project.ipynb
+├── lab3
+├── models
+│   ├── anonymous_1_bd_net.h5
+│   ├── anonymous_1_bd_weights.h5
+│   ├── anonymous_2_bd_net.h5
+│   ├── anonymous_2_bd_weights.h5
+│   ├── multi_trigger_multi_target_bd_net.h5
+│   ├── multi_trigger_multi_target_bd_weights.h5
+│   ├── sunglasses_bd_net.h5
+│   └── sunglasses_bd_weights.h5
+├── models_G
+│   ├── README.md
+│   ├── anonymous1_prune_net.h5
+│   ├── anonymous2_prune_net.h5
+│   ├── anonymous_1_STRIP_net.h5
+│   ├── anonymous_2_STRIP_net.h5
+│   ├── multi_trigger_multi_target_STRIP_net.h5
+│   ├── multi_trigger_multi_target_prune_net.h5
+│   ├── sunglasses_STRIP_net.h5
+│   └── sunglasses_prune_net.h5
+└── report
+    ├── 20211222021029.png
+    ├── 20211222021035.png
+    └── report.md
+
 
 ```
 
 ## I. Dependencies
    1. Python 3.6.9
-   2. Keras 2.3.1
+   2. Keras ~~2.3.1~~  2.4.3
    3. Numpy 1.16.3
    4. Matplotlib 2.2.2
    5. H5py 2.9.0
-   6. TensorFlow-gpu 1.15.2
+   6. TensorFlow-gpu ~~1.15.2~~ 2.4.1
    
 ## II. Validation Data
    1. Download the validation and test datasets from [here](https://drive.google.com/drive/folders/13o2ybRJ1BkGUvfmQEeZqDo1kskyFywab?usp=sharing) and store them under `data/` directory.
