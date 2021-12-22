@@ -6,6 +6,7 @@ import keras
 import argparse
 from lab3.utils import data_loader
 import numpy as np
+import random
 
 def parse_args():
     # Parse input arguments
@@ -38,8 +39,8 @@ if __name__ == '__main__':
         sample_num = args.sample_num
         test_x, test_y = data_loader(args.test, False, True)
         G1 = strip.RepairedNetG(STRIP_net, '../data/clean_validation_data.h5')
-        G1_pred = G1.predict(test_x[:sample_num, :, :, :])[0]
+        start_point = random.randint(0, len(test_y) - sample_num - 1)
+        G1_pred = G1.predict(test_x[start_point:start_point + sample_num, :, :, :])[0]
         pred = [int(i) for i in G1_pred]
-        # asr = (1-np.mean(np.equal(pred, test_y[:sample_num]))) * 100
         match_rate = np.mean(np.equal(pred, test_y[:sample_num]))
         print("match_rate: ", match_rate)

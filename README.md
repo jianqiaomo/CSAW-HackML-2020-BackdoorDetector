@@ -75,6 +75,7 @@
 └── report
     ├── 20211222021029.png
     ├── 20211222021035.png
+    ├── chart.png
     └── report.md
 
 

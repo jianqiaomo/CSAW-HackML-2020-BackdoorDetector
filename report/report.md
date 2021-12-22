@@ -21,7 +21,9 @@ To achieve this Goal,  we tried two different methods from different aspects.
 
 ## Option 1: Fine-Pruning
 
-Please see [README.md](https://github.com/jianqiaomo/CSAW-HackML-2020-BackdoorDetector/blob/master/eval_fine_prune/README.md) 
+by _Wenjie Zhu_ (wz2140@nyu.edu)
+
+Please see [Fine-Pruning Report](https://github.com/jianqiaomo/CSAW-HackML-2020-BackdoorDetector/blob/master/eval_fine_prune/README.md) 
 to run the script.
 
 The first method we tried is Fine-Pruning method which is introduced in class and can be found more in the paper "Fine-Pruning: Defending Against Backdooring Attacks on Deep Neural Networks". 
@@ -50,12 +52,15 @@ However, when we tried to use this method to fix other BadNet which poisoned by 
 
 ## Option 2: STRIP
 
+by _Jianqiao Mo_ (jq.mo@nyu.edu) and _Tianxu Lu_ (tl3173@nyu.edu)
+
+Please see [STRIP Report](https://github.com/jianqiaomo/CSAW-HackML-2020-BackdoorDetector/blob/master/eval_STRIP/README.md) 
+to run the script.
+
 `detect_trojan` in `strip.py` can detect whether the input is poisoned or not for single input and a batch of inputs respectively. If the input is poisoned, label N will be returned. If the input is clean, label between 0 to (N-1) will be returned.
 
 The `eval_strip_[badnet_name].py` is script to evaluate.
 
-Please see [README.md](https://github.com/jianqiaomo/CSAW-HackML-2020-BackdoorDetector/blob/master/eval_STRIP/README.md) 
-to run the script.
 
 
 
