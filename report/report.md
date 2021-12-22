@@ -1,9 +1,10 @@
 # ML for cybersecurity Project Report
 
-* Team member and distribution: 
-  * Jianqiao Mo: STRIP and report
-  * Tianxu Lu: STRIP and report
-  * Wenjie Zhu: Fine-pruning
+* Please review with this distribution:
+  * Wenjie Zhu: **Fine-pruning** Part (code)
+  * Jianqiao Mo: **STRIP** Part (code)
+  * Tianxu Lu: **STRIP** Part (report)
+
 * Github Repo: https://github.com/jianqiaomo/CSAW-HackML-2020-BackdoorDetector
 
 ## Project Goal and Introduction
