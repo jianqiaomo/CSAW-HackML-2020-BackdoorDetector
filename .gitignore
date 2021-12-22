@@ -5,3 +5,5 @@ lab3/data/cl/*
 /data/anonymous_1_poisoned_data.h5
 /data/clean_test_data.h5
 /data/sunglasses_poisoned_data.h5
+/data/clean_validation_data.h5
+/data/Multi-trigger Multi-target/eyebrows_poisoned_data.h5
