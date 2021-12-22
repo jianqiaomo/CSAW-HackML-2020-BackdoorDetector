@@ -1,4 +1,4 @@
-# STRIP
+# STRIP Exprement Report
 
 #### by _Jianqiao Mo_, _Tianxu Lu_
 
