@@ -1,6 +1,8 @@
 # STRIP
 
-by _Jianqiao Mo_, _Tianxu Lu_
+#### by _Jianqiao Mo_, _Tianxu Lu_
+
+{jq.mo, tl3173}@nyu.edu
 
 ----------------
 

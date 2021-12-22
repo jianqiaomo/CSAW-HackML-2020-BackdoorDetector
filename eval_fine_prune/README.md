@@ -1,6 +1,8 @@
-## Fine-pruning
+# Fine-pruning
 
-by _Wenjie Zhu_
+#### by _Wenjie Zhu_
+
+wz2140@nyu.edu
 
 ----------------
 
