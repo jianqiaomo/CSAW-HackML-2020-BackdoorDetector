@@ -95,6 +95,9 @@ Here are other simple testing examples.
 To save time, we randomly pick 100 images of the dataset and find our the accuracy of clean dataset / asr of 
 poisoned dataset.  
 
+
+Table: Testing result on G
+
 |               model              | accuracy(clean_test_data) |                                    asr / (poisoned dataset)                                    |
 |:--------------------------------:|:-------------------------:|:----------------------------------------------------------------------------------------------:|
 |         anonymous_1_STRIP        |            0.94           |                                   0.04 (anonymous_1_poisoned)                                  |
@@ -102,6 +105,7 @@ poisoned dataset.
 |         sunglasses_STRIP         |            0.92           |                                   0.17 (sunglasses_poisoned)                                   |
 | multi_trigger_multi_target_STRIP |            0.89           | 0.25 (Multi-/eyebrows_poisoned) <br> 0.03 (Multi-/lipstick_poisoned) <br> 0 (Multi-/sunglasses_poisoned) |
 
+<div align=center>Figure: Overall (accuracy / asr) comparison between badnet and repaired result</div>
 
 <div align=center><img src="https://github.com/jianqiaomo/CSAW-HackML-2020-BackdoorDetector/blob/master/report/chart.png"/></div>
 
