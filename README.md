@@ -23,35 +23,31 @@
 │   ├── data.txt
 │   ├── sunglasses_poisoned_data.h5
 │   └── test_images
-│       ├── demo.jpeg
-│       ├── demo1.jpeg
-│       ├── demo10.jpeg
-│       ├── demo2.jpeg
-│       ├── demo3.jpeg
-│       ├── demo4.jpeg
-│       ├── demo5.jpeg
-│       ├── demo6.jpeg
-│       ├── demo7.jpeg
-│       ├── demo8.jpeg
-│       └── demo9.jpeg
+│       └── demo.jpeg
 ├── eval.py
-├── eval_STRIP              // by Jianqiao Mo, Tianxu Lu
+├── eval_STRIP           // by Jianqiao Mo, Tianxu Lu
 │   ├── README.md
+│   ├── __pycache__
+│   │   └── strip.cpython-37.pyc
 │   ├── eval_strip_anonymous_1.py
 │   ├── eval_strip_anonymous_2.py
 │   ├── eval_strip_multi.py
 │   ├── eval_strip_sunglasses.py
 │   ├── repaire.py
 │   └── strip.py
-├── eval_fine_prune         // by Wenjie Zhu
+├── eval_fine_prune      // by Wenjie Zhu
 │   ├── README.md
 │   ├── eval_fine_prune_anonymous_1.py
 │   ├── eval_fine_prune_anonymous_2.py
 │   ├── eval_fine_prune_multi.py
 │   ├── eval_fine_prune_sunglasses.py
 │   ├── evaluate_example.ipynb
-│   ├── fine_prune.py
-│   └── fine_prune_project.ipynb
+│   ├── fine_prune_project.ipynb
+│   └── images
+│       ├── eval_1268.png
+│       ├── eval_1283.png
+│       ├── train_process.png
+│       └── validate_result.png
 ├── lab3
 ├── models
 │   ├── anonymous_1_bd_net.h5
@@ -77,8 +73,6 @@
     ├── 20211222021035.png
     ├── chart.png
     └── report.md
-
-
 ```
 
 ## I. Dependencies
